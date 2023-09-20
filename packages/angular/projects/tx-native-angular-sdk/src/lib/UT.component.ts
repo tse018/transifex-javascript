@@ -33,8 +33,10 @@ export class UTComponent extends TComponent {
    *
    * @param translationService
    */
-  constructor(translationService: TranslationService,
-    protected instance: TXInstanceComponent) {
+  constructor(
+      translationService: TranslationService,
+      protected override instance: TXInstanceComponent,
+  ) {
     super(translationService, instance);
     this.escapeVars = true;
   }

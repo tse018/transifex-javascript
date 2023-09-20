@@ -123,11 +123,11 @@ export class TComponent implements OnInit, OnDestroy, OnChanges {
    * Component destruction
    */
   ngOnDestroy() {
-    if (typeof this.onLocaleChange !== 'undefined') {
+    if (this.onLocaleChange !== undefined) {
       this.onLocaleChange.unsubscribe();
       this.onLocaleChange = undefined;
     }
-    if (typeof this.onTranslationsFetch !== 'undefined') {
+    if (this.onTranslationsFetch !== undefined) {
       this.onTranslationsFetch.unsubscribe();
       this.onTranslationsFetch = undefined;
     }

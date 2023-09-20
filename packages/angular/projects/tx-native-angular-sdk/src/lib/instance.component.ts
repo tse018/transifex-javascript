@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 
 import { TranslationService } from './translation.service';
+import {TxNative} from "@transifex/native";
 
 @Component({
   selector: 'tx-instance',
@@ -20,17 +21,13 @@ import { TranslationService } from './translation.service';
  * @param {EventEmitter} instanceReady
  */
 export class TXInstanceComponent implements OnInit {
-  @Input()
-    alias!: string;
+  @Input() alias = '';
 
-  @Input()
-    token!: string;
+  @Input() token = '';
 
-  @Input()
-    controlled = true;
+  @Input() controlled = true;
 
-  @Output()
-    instanceReady: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() instanceReady: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // Observables for detecting instance readiness
   get instanceIsReady(): Observable<boolean> {
@@ -40,7 +37,7 @@ export class TXInstanceComponent implements OnInit {
   private instanceReadySubject = new ReplaySubject<boolean>(0);
 
   // The instance
-  private instance: any;
+  private instance?: TxNative;
 
   /**
    * Constructor
