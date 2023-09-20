@@ -32,6 +32,7 @@ export class UTComponent extends TComponent {
    * Constructor
    *
    * @param translationService
+   * @param instance
    */
   constructor(
       translationService: TranslationService,

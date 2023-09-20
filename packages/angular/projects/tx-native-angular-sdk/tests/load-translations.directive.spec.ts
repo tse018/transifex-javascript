@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ReplaySubject } from 'rxjs';
 
@@ -22,16 +22,7 @@ describe('LoadTranslationsDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let service: TranslationService;
 
-  const translationParams = {
-    _key: '',
-    _context: '',
-    _comment: '',
-    _charlimit: 0,
-    _tags: '',
-    _escapeVars: false,
-    _inline: false,
-    sanitize: false,
-  };
+
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({

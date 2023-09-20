@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { TXInstanceComponent } from './instance.component';
@@ -127,6 +127,7 @@ export class TComponent implements OnInit, OnDestroy, OnChanges {
       this.onLocaleChange.unsubscribe();
       this.onLocaleChange = undefined;
     }
+
     if (this.onTranslationsFetch !== undefined) {
       this.onTranslationsFetch.unsubscribe();
       this.onTranslationsFetch = undefined;
@@ -135,10 +136,8 @@ export class TComponent implements OnInit, OnDestroy, OnChanges {
 
   /**
    * Input parameters change detector
-   *
-   * @param changes
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     this.translate();
   }
 

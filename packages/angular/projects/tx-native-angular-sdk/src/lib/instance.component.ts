@@ -46,7 +46,7 @@ export class TXInstanceComponent implements OnInit {
    */
   constructor(private translationService: TranslationService) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void>  {
     if (!this.token || !this.alias) {
       this.instanceReady.emit(false);
       this.instanceReadySubject.next(false);
