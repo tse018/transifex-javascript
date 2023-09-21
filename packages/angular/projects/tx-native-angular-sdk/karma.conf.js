@@ -8,7 +8,10 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+
       require('karma-coverage'),
+      require('karma-jasmine-html-reporter'),
+
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
@@ -29,10 +32,11 @@ module.exports = function (config) {
       subdir: '.',
       reporters: [
         { type: 'html' },
+        { type: 'lcovonly' },
         { type: 'text-summary' }
       ]
     },
-    reporters: ['progress'],
+    reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
