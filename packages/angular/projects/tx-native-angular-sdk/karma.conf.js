@@ -17,6 +17,7 @@ module.exports = function (config) {
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
         // for example, you can disable the random execution with `random: false`
         // or set a specific seed with `seed: 4321`
+        failSpecWithNoExpectations: true,
       },
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
@@ -37,6 +38,12 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['ChromeHeadlessNoSandbox'],
+    reportSlowerThan: 250,
+    customLaunchers: {
+      AutomatedChrome: {
+        base: 'Chrome',
+        flags: [ '--enable-automation' ],
+      },
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
         base: 'ChromeHeadless',
@@ -49,5 +56,6 @@ module.exports = function (config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
     restartOnFileChange: true
+  }
   });
 };
