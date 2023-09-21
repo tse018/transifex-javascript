@@ -53,7 +53,7 @@ describe('LanguagePickerComponent', () => {
     spyOn(service, 'getLanguages').and.resolveTo(languages);
 
     // act
-    component.ngOnInit();
+    await component.getLanguages();
     fixture.detectChanges();
 
     // assert
@@ -71,7 +71,7 @@ describe('LanguagePickerComponent', () => {
     spyOn(component, 'onChange').and.callThrough();
 
     // act
-    component.ngOnInit();
+    await component.getLanguages();
     fixture.detectChanges();
 
     // assert

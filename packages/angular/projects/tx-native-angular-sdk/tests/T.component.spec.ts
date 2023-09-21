@@ -159,6 +159,7 @@ describe('TComponent', () => {
     service.translate('test', { ...translationParams });
     component.str = 'other-value';
     component.ngOnChanges()
+    fixture.detectChanges();
 
     // assert
     expect(service.translate).toHaveBeenCalled();
