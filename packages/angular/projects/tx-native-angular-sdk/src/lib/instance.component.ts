@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 
@@ -12,14 +11,6 @@ import {TxNative} from "@transifex/native";
   `,
 })
 
-/**
- * A TX Native instance selector component
- *
- * @param {string} alias
- * @param {string} token
- * @param {boolean} controlled
- * @param {EventEmitter} instanceReady
- */
 export class TXInstanceComponent implements OnInit {
   @Input() alias = '';
 
@@ -39,11 +30,6 @@ export class TXInstanceComponent implements OnInit {
   // The instance
   private instance?: TxNative;
 
-  /**
-   * Constructor
-   *
-   * @param translationService
-   */
   constructor(private translationService: TranslationService) {}
 
   async ngOnInit(): Promise<void>  {

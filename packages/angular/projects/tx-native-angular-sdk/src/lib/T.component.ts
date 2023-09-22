@@ -14,20 +14,6 @@ import { TranslationService } from './translation.service';
   styles: [],
 })
 
-/**
- * A translation component
- *
- * @param {string} str
- * @param {string=} key
- * @param {string=} context
- * @param {string=} comment
- * @param {number=} charlimit
- * @param {string=} tags
- * @param {boolean=} escapeVars
- * @param {boolean=} inline
- * @param {boolean=} sanitize
- * @param {Object=} vars
- */
 export class TComponent implements OnInit, OnDestroy, OnChanges {
   @Input()
     str = '';
@@ -91,12 +77,6 @@ export class TComponent implements OnInit, OnDestroy, OnChanges {
 
   private actualVars: Record<string, unknown> = {};
 
-  /**
-   * Constructor
-   *
-   * @param translationService
-   * @param instance
-   */
   constructor(protected translationService: TranslationService,
     protected instance: TXInstanceComponent) {
     this.onLocaleChange = this.localeChanged.subscribe(

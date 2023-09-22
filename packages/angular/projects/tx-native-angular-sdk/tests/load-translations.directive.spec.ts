@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import {Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ReplaySubject } from 'rxjs';
@@ -12,17 +12,13 @@ describe('LoadTranslationsDirective', () => {
       <div [txLoadTranslations]="'tag1'"></div>
     `,
   })
-  class TestComponent implements OnDestroy {
-    ngOnDestroy() {}
-  }
+  class TestComponent {}
 
   let localeChangedSubject: ReplaySubject<string>;
 
-  let directives: any;
+  let directives: DebugElement[];
   let fixture: ComponentFixture<TestComponent>;
   let service: TranslationService;
-
-
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({

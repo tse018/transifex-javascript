@@ -1,4 +1,3 @@
-/* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { tx } from '@transifex/native';
