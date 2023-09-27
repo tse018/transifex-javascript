@@ -7,8 +7,7 @@ import {ITXInstanceConfiguration} from "./interfaces";
  * Decorator for using transparently the translation service as a property
  */
 
-export const T = (str: string, params?: Record<string, unknown>,
-                  instanceConfig?: ITXInstanceConfiguration) => (target: any, key: string) => {
+export const T = (str: string, params?: Record<string, unknown>, instanceConfig?: ITXInstanceConfiguration) => (target: any, key: string) => {
   const injector = Injector.create(
       {
         providers: [
