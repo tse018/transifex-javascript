@@ -26,10 +26,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/tx-native-angular-sdk/test.ts",
             "tsConfig": "projects/tx-native-angular-sdk/tsconfig.spec.json",
             "karmaConfig": "projects/tx-native-angular-sdk/karma.conf.js",
-            "codeCoverage": true
+            "codeCoverage": true,
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         },
         "lint": {

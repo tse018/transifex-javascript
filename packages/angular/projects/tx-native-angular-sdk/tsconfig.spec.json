@@ -10,10 +10,10 @@
     "typeRoots": [ "../node_modules/@types" ],
   },
   "files": [
-    "test.ts"
   ],
   "include": [
     "**/*.spec.ts",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "**/*.ts"
   ]
 }
