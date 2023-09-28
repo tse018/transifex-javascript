@@ -46,7 +46,6 @@
       }
     }
   },
-  "defaultProject": "@transifex/angular",
   "schematics": {
     "@angular-eslint/schematics:application": {
       "setParserOptionsProject": true
