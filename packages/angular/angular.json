@@ -26,10 +26,7 @@
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/tx-native-angular-sdk/test.ts",
-            "tsConfig": "projects/tx-native-angular-sdk/tsconfig.spec.json",
-            "karmaConfig": "projects/tx-native-angular-sdk/karma.conf.js",
-            "codeCoverage": true
+            "tsConfig": "projects/tx-native-angular-sdk/tsconfig.spec.json"
           }
         },
         "lint": {
