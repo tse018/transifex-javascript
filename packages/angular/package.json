@@ -32,6 +32,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-builders/jest": "^16.0.1",
     "@angular/animations": "~16.2.7",
     "@angular/common": "~16.2.7",
     "@angular/compiler": "~16.2.7",

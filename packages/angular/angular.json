@@ -24,9 +24,10 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
+          "builder": "@angular-devkit/build-angular:jest:run",
+
           "options": {
-            "tsConfig": "projects/tx-native-angular-sdk/tsconfig.spec.json",
+            "tsConfig": "projects/tx-native-angular-sdk/tsconfig.spec.json"
           }
         },
         "lint": {
