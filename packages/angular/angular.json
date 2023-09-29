@@ -24,12 +24,9 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest",
           "options": {
-            "main": "projects/tx-native-angular-sdk/test.ts",
-            "tsConfig": "projects/tx-native-angular-sdk/tsconfig.spec.json",
-            "karmaConfig": "projects/tx-native-angular-sdk/karma.conf.js",
-            "codeCoverage": true
+            "tsConfig": "projects/tx-native-angular-sdk/tsconfig.spec.json"
           }
         },
         "lint": {
