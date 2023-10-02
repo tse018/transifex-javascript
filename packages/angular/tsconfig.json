@@ -26,7 +26,6 @@
       "dom"
     ],
     "types": [ "node", "jest" ],
-    "typeRoots": [ "../node_modules/@types" ],
     "paths": {
       "tx-native-angular-sdk": [
         "dist/tx-native-angular-sdk/tx-native-angular-sdk",

@@ -3,16 +3,13 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
-    "types": [
-      "jest",
+    "esModuleInterop": true,
+    "typeRoots": [
+      "../../node_modules/@types"
     ],
-    "typeRoots": [ "../node_modules/@types" ],
   },
-  "files": [
-    "test.ts"
-  ],
   "include": [
+    "tests",
     "**/*.spec.ts",
-    "**/*.d.ts"
-  ]
+  ],
 }

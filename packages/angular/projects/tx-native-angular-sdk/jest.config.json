@@ -1,0 +1,19 @@
+{
+    "moduleFileExtensions": ["js", "json", "ts"],
+    "verbose": true,
+    "testRegex": ".spec.ts$",
+    "setupFilesAfterEnv": ["<rootDir>/projects/tx-native-angular-sdk/setup-jest.ts"],
+    "testEnvironment": "node",
+    "rootDir": "../../",
+    "roots": [
+        "<rootDir>"
+    ],
+    "transform": {
+        "^.+\\.ts$": "jest-preset-angular"
+    },
+    "modulePaths": [
+        "<rootDir>/../"
+    ],
+    "preset": "jest-preset-angular",
+    "transformIgnorePatterns": ["node_modules/(?!tslib|rxjs|@angular)"]
+}

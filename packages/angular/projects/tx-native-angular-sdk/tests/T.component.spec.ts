@@ -13,7 +13,7 @@ describe('TComponent', () => {
   let fixture: ComponentFixture<TComponent>;
   let service: TranslationService;
   let instance: TXInstanceComponent;
-  let localeChangedSpy: jasmine.Spy<jasmine.Func>;
+  let localeChangedSpy;
 
   const translationParams = {
     _key: '',
@@ -39,7 +39,7 @@ describe('TComponent', () => {
     instance = TestBed.inject(TXInstanceComponent);
 
     spyOn(service, 'getCurrentLocale').and.returnValue('en');
-    localeChangedSpy = spyOnProperty(service, 'localeChanged', 'get').and.returnValue(localeChangedSubject);
+    localeChangedSpy = jest.spyOn(service, 'localeChanged', 'get').mockReturnValue(localeChangedSubject);
     spyOn(service, 'setCurrentLocale').and.callFake(async (locale) => {
       localeChangedSubject.next(locale);
     });
@@ -54,8 +54,8 @@ describe('TComponent', () => {
   it('should create the component', async () => {
     // setup
     spyOn(component, 'translate');
-    localeChangedSpy = spyOnProperty(component, 'localeChanged', 'get')
-      .and.returnValue(localeChangedSubject);
+    localeChangedSpy = jest.spyOn(component, 'localeChanged', 'get')
+      .mockReturnValue(localeChangedSubject);
 
     // act
     component.ngOnInit();
@@ -69,7 +69,7 @@ describe('TComponent', () => {
     expect(component.translate).toHaveBeenCalled();
     expect(component.onLocaleChange).toBeTruthy();
     expect(component.onTranslationsFetch).toBeTruthy();
-    expect(localeChangedSpy.calls.any()).toEqual(true);
+    expect(localeChangedSpy).toHaveBeenCalled();
   });
 
   it('should translate string', () => {
@@ -89,7 +89,7 @@ describe('TComponent', () => {
 
   it('should translate string without vars', () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('translated');
+    jest.spyOn(service, 'translate').mockReturnValue('translated');
 
     // act
     component.str = 'not-translated';
