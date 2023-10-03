@@ -5,7 +5,7 @@
     "outDir": "../../out-tsc/spec",
     "esModuleInterop": true,
     "typeRoots": [
-      "../../node_modules/@types"
+      "../../node_modules/@types",
     ],
   },
   "include": [

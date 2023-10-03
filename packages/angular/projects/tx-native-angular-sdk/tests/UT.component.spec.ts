@@ -26,8 +26,8 @@ describe('UTComponent', () => {
     })
       .compileComponents();
     service = TestBed.inject(TranslationService);
-    spyOn(service, 'setCurrentLocale');
-    spyOn(service, 'getCurrentLocale').and.returnValue('en');
+    jest.spyOn(service, 'setCurrentLocale');
+    jest.spyOn(service, 'getCurrentLocale').mockReturnValue('en');
   });
 
   beforeEach(() => {
@@ -38,9 +38,9 @@ describe('UTComponent', () => {
 
   it('should create the component', () => {
     // setup
-    spyOn(component, 'translate');
-    const localeChangedSpy = spyOnProperty(component, 'localeChanged', 'get')
-      .and.returnValue(of('el'));
+    jest.spyOn(component, 'translate');
+    const localeChangedSpy = jest.spyOn(component, 'localeChanged', 'get')
+      .mockReturnValue(of('el'));
 
     // act
     component.ngOnInit();
@@ -52,12 +52,14 @@ describe('UTComponent', () => {
     expect(component.localeChanged).toBeTruthy();
     expect(component.translate).toHaveBeenCalled();
     expect(component.onLocaleChange).toBeTruthy();
-    expect(localeChangedSpy.calls.any()).toEqual(true);
+    //expect(localeChangedSpy.call.any()).toEqual(true);
+      expect(localeChangedSpy).toHaveBeenCalled(); // Updated assertion
+
   });
 
   it('should translate string', () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('translated');
+    jest.spyOn(service, 'translate').mockReturnValue('translated');
 
     // act
     component.str = 'not-translated';
@@ -72,7 +74,7 @@ describe('UTComponent', () => {
 
   it('should translate string with key', () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('translated');
+    jest.spyOn(service, 'translate').mockReturnValue('translated');
 
     // act
     component.str = 'not-translated';
@@ -89,7 +91,7 @@ describe('UTComponent', () => {
   it('should translate and sanitize the string using div as wrapper',
     () => {
       // setup
-      spyOn(service, 'translate').and.returnValue('<a>translated</a>');
+      jest.spyOn(service, 'translate').mockReturnValue('<a>translated</a>');
 
       // act
       component.str = '<a>not-translated</a>';
@@ -107,7 +109,7 @@ describe('UTComponent', () => {
   it('should translate and sanitize the string using span as wrapper',
     () => {
       // setup
-      spyOn(service, 'translate').and.returnValue('<a>translated</a>');
+      jest.spyOn(service, 'translate').mockReturnValue('<a>translated</a>');
 
       // act
       component.str = '<a>not-translated</a>';

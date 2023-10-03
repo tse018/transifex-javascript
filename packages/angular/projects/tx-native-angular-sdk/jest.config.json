@@ -3,7 +3,7 @@
     "verbose": true,
     "testRegex": ".spec.ts$",
     "setupFilesAfterEnv": ["<rootDir>/projects/tx-native-angular-sdk/setup-jest.ts"],
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "rootDir": "../../",
     "roots": [
         "<rootDir>"

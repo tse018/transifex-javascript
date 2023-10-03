@@ -38,9 +38,9 @@ describe('TComponent', () => {
     service = TestBed.inject(TranslationService);
     instance = TestBed.inject(TXInstanceComponent);
 
-    spyOn(service, 'getCurrentLocale').and.returnValue('en');
+    jest.spyOn(service, 'getCurrentLocale').mockReturnValue('en');
     localeChangedSpy = jest.spyOn(service, 'localeChanged', 'get').mockReturnValue(localeChangedSubject);
-    spyOn(service, 'setCurrentLocale').and.callFake(async (locale) => {
+    jest.spyOn(service, 'setCurrentLocale').mockImplementation(async (locale) => {
       localeChangedSubject.next(locale);
     });
   });
@@ -53,7 +53,7 @@ describe('TComponent', () => {
 
   it('should create the component', async () => {
     // setup
-    spyOn(component, 'translate');
+    jest.spyOn(component, 'translate');
     localeChangedSpy = jest.spyOn(component, 'localeChanged', 'get')
       .mockReturnValue(localeChangedSubject);
 
@@ -74,7 +74,7 @@ describe('TComponent', () => {
 
   it('should translate string', () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('translated');
+    jest.spyOn(service, 'translate').mockReturnValue('translated');
 
     // act
     component.str = 'not-translated';
@@ -105,7 +105,7 @@ describe('TComponent', () => {
 
   it('should translate string with key', () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('translated');
+    jest.spyOn(service, 'translate').mockReturnValue('translated');
 
     // act
     component.str = 'not-translated';
@@ -121,7 +121,7 @@ describe('TComponent', () => {
 
   it('should translate and not sanitize the string', () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('<a>translated</a>');
+    jest.spyOn(service, 'translate').mockReturnValue('<a>translated</a>');
 
     // act
     component.str = '<a>not-translated</a>';
@@ -136,7 +136,7 @@ describe('TComponent', () => {
 
   it('should translate and sanitize the string', () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('<a>translated</a>');
+    jest.spyOn(service, 'translate').mockReturnValue('<a>translated</a>');
 
     // act
     component.str = '<a>not-translated</a>';
@@ -152,8 +152,8 @@ describe('TComponent', () => {
 
   it('should detect input parameters change and translate', () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('<a>translated</a>');
-    spyOn(tx, 'translate');
+    jest.spyOn(service, 'translate').mockReturnValue('<a>translated</a>');
+    jest.spyOn(tx, 'translate');
 
     // act
     service.translate('test', { ...translationParams });
@@ -176,7 +176,7 @@ describe('TComponent', () => {
     fixture.detectChanges();
 
     // change
-    spyOn(service, 'translate').and.returnValue('translated-again');
+    jest.spyOn(service, 'translate').mockReturnValue('translated-again');
 
     await service.setCurrentLocale('nb');
 
@@ -190,7 +190,7 @@ describe('TComponent', () => {
 
   it('should respect changes to input params', async () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('translated');
+    jest.spyOn(service, 'translate').mockReturnValue('translated');
 
     // act
     component.str = 'not-translated';
@@ -215,7 +215,7 @@ describe('TComponent', () => {
     // setup
     instance.token = 'instance-token';
     instance.alias = 'instance-alias';
-    spyOn(service, 'translate').and.returnValue('translated');
+    jest.spyOn(service, 'translate').mockReturnValue('translated');
 
     // act
     component.str = 'not-translated';
@@ -230,7 +230,7 @@ describe('TComponent', () => {
 
   it('should detect translationsFetched', async () => {
     // setup
-    spyOn(service, 'translate').and.returnValue('translated');
+    jest.spyOn(service, 'translate').mockReturnValue('translated');
 
     // act
     component.str = 'not-translated';
@@ -250,7 +250,7 @@ describe('TComponent', () => {
       // setup
       instance.token = 'instance-token';
       instance.alias = 'instance-alias';
-      spyOn(service, 'translate').and.returnValue('translated');
+      jest.spyOn(service, 'translate').mockReturnValue('translated');
 
       // act
       component.str = 'not-translated';

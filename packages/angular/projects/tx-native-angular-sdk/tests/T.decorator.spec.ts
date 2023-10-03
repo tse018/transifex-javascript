@@ -24,7 +24,7 @@ describe('T Decorator', () => {
   });
 
   beforeEach(() => {
-    spyOn(tx, 'translate').and.returnValue('ok-translated-dec');
+    jest.spyOn(tx, 'translate').mockReturnValue('ok-translated-dec');
   });
 
   it('should test the decorator T', () => {

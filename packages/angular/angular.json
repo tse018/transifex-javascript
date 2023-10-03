@@ -30,7 +30,7 @@
                 "zone.js",
                 "zone.js/testing"
               ],
-            "tsConfig": "projects/tx-native-angular-sdk/tsconfig.spec.json",
+            "tsConfig": "projects/tx-native-angular-sdk/tsconfig.spec.json"
             }
         },
         "lint": {

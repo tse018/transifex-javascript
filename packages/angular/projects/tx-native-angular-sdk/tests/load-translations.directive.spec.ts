@@ -30,10 +30,9 @@ describe('LoadTranslationsDirective', () => {
 
     service = TestBed.inject(TranslationService);
 
-    spyOn(service, 'getCurrentLocale').and.returnValue('en');
-    spyOnProperty(service, 'localeChanged', 'get').and.
-      returnValue(localeChangedSubject);
-    spyOn(service, 'setCurrentLocale').and.callFake(async (locale) => {
+    jest.spyOn(service, 'getCurrentLocale').mockReturnValue('en');
+    jest.spyOn(service, 'localeChanged', 'get').mockReturnValue(localeChangedSubject);
+    jest.spyOn(service, 'setCurrentLocale').mockImplementation(async (locale) => {
       localeChangedSubject.next(locale);
     });
 
@@ -61,7 +60,7 @@ describe('LoadTranslationsDirective', () => {
 
   it('should detect localeChange and translate', async () => {
     // setup
-    spyOn(service, 'fetchTranslations');
+    jest.spyOn(service, 'fetchTranslations');
     const directive = new LoadTranslationsDirective(service);
 
     // act

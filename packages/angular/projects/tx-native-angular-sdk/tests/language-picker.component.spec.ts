@@ -38,7 +38,7 @@ describe('LanguagePickerComponent', () => {
 
   it('should get languages', async () => {
     // setup
-    spyOn(service, 'getLanguages').and.resolveTo(languages);
+    jest.spyOn(service, 'getLanguages').mockResolvedValue(languages);
 
     // act
     await component.ngOnInit();
@@ -50,7 +50,7 @@ describe('LanguagePickerComponent', () => {
 
   it('should show a select component with languages', async () => {
     // setup
-    spyOn(service, 'getLanguages').and.resolveTo(languages);
+    jest.spyOn(service, 'getLanguages').mockResolvedValue(languages);
 
     // act
     await component.ngOnInit();
@@ -66,9 +66,9 @@ describe('LanguagePickerComponent', () => {
 
   it('should detect language change', async () => {
     // setup
-    spyOn(service, 'getLanguages').and.resolveTo(languages);
-    spyOn(service, 'setCurrentLocale').and.returnValue(Promise.resolve());
-    spyOn(component, 'onChange').and.callThrough();
+    jest.spyOn(service, 'getLanguages').mockResolvedValue(languages);
+    jest.spyOn(service, 'setCurrentLocale').mockReturnValue(Promise.resolve());
+    jest.spyOn(component, 'onChange').mockImplementation()
 
     // act
     await component.getLanguages();
@@ -97,8 +97,8 @@ describe('LanguagePickerComponent', () => {
     instance.alias = 'test';
     instance.token = 'test';
     component.instance = instance;
-    spyOnProperty(instance, 'instanceIsReady').and.returnValue(of(true));
-    spyOn(service, 'getLanguages').and.resolveTo(languages);
+    jest.spyOn(instance, 'instanceIsReady').mockReturnValue(of(true));
+    jest.spyOn(service, 'getLanguages').mockResolvedValue(languages);
 
     // act
     await instance.ngOnInit();

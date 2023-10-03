@@ -32,7 +32,9 @@ describe('TranslatePipe', () => {
         TXInstanceComponent,
         {
           provide: ChangeDetectorRef,
-          useValue: jasmine.createSpyObj<ChangeDetectorRef>('ChangeDetectorRef', [ 'markForCheck' ]),
+          useValue: {
+            markForCheck: jest.fn()
+          },
         },
       ],
     });
@@ -44,14 +46,14 @@ describe('TranslatePipe', () => {
 
     localeChangedSubject = new ReplaySubject<string>(0);
 
-    spyOn(service, 'getCurrentLocale').and.returnValue('en');
-    spyOnProperty(service, 'localeChanged', 'get').and.returnValue(localeChangedSubject);
-    spyOn(service, 'setCurrentLocale').and.callFake(async (locale) => {
+    jest.spyOn(service, 'getCurrentLocale').mockReturnValue('en');
+    jest.spyOn(service, 'localeChanged', 'get').mockReturnValue(localeChangedSubject);
+    jest.spyOn(service, 'setCurrentLocale').mockImplementation(async (locale) => {
       localeChangedSubject.next(locale);
     });
 
-    spyOn(tx, 'init');
-    spyOn(tx, 'setCurrentLocale');
+    jest.spyOn(tx, 'init');
+    jest.spyOn(tx, 'setCurrentLocale');
 
     await service.init({ token: 'test' });
     await service.setCurrentLocale('el');

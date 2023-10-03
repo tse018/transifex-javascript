@@ -36,7 +36,7 @@ describe('TranslationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(TranslationService);
-    spyOn(tx, 'init');
+    jest.spyOn(tx, 'init');
   });
 
   it('should be created', () => {
@@ -45,13 +45,13 @@ describe('TranslationService', () => {
   });
 
   it('should init the TX Native object', async () => {
-    spyOn(service, 'getInstance').and.returnValue({
+    jest.spyOn(service, 'getInstance').mockReturnValue({
       currentLocale: 'en',
       fetchTranslations: tx.fetchTranslations,
       init: tx.init,
       fetchedTags: { en: [] },
     } as unknown as TxNative);
-    spyOn(service, 'getLanguages');
+    jest.spyOn(service, 'getLanguages');
 
     // act
     await service.init(txConfig);
@@ -63,7 +63,7 @@ describe('TranslationService', () => {
 
   it('should translate', () => {
     // setup
-    spyOn(tx, 'translate').and.returnValue('translated');
+    jest.spyOn(tx, 'translate').mockReturnValue('translated');
 
     // act
     const result = service.translate('not-translated', { ...translationParams });
@@ -75,7 +75,7 @@ describe('TranslationService', () => {
 
   it('should translate with key', () => {
     // setup
-    spyOn(tx, 'translate').and.returnValue('translated');
+    jest.spyOn(tx, 'translate').mockReturnValue('translated');
 
     // act
     const result = service.translate('not-translated', { ...translationParams, _key: 'key-string' });
@@ -87,7 +87,7 @@ describe('TranslationService', () => {
 
   it('should translate and escape', () => {
     // setup
-    spyOn(tx, 'translate').and.returnValue('<b>Hola {username}</b>');
+    jest.spyOn(tx, 'translate').mockReturnValue('<b>Hola {username}</b>');
 
     // act
     const result = service.translate('<b>Hello {username}</b>', { ...translationParams, _escapeVars: true });
@@ -99,7 +99,7 @@ describe('TranslationService', () => {
 
   it('should set current locale', async () => {
     // setup
-    spyOn(tx, 'setCurrentLocale').and.resolveTo();
+    jest.spyOn(tx, 'setCurrentLocale').mockResolvedValue();
 
     // act
     await service.setCurrentLocale('el');
@@ -110,7 +110,7 @@ describe('TranslationService', () => {
 
   it('should get current locale', () => {
     // setup
-    spyOn(tx, 'getCurrentLocale').and.returnValue('en');
+    jest.spyOn(tx, 'getCurrentLocale').mockReturnValue('en');
 
     // act
     const result = service.getCurrentLocale();
@@ -122,7 +122,7 @@ describe('TranslationService', () => {
 
   it('should get languages', async () => {
     // setup
-    spyOn(tx, 'getLanguages').and.resolveTo(languages);
+    jest.spyOn(tx, 'getLanguages').mockResolvedValue(languages);
 
     // act
     const result = await service.getLanguages();
@@ -134,7 +134,7 @@ describe('TranslationService', () => {
 
   it('should add a controlled instance successfully', async () => {
     // setup
-    spyOn(tx, 'controllerOf').and.resolveTo();
+    jest.spyOn(tx, 'controllerOf').mockResolvedValue(Promise.resolve<any>(true));
 
     const instanceConfig = {
       token: 'token',
@@ -152,7 +152,7 @@ describe('TranslationService', () => {
 
   it('should add a not controlled instance successfully', async () => {
     // setup
-    spyOn(tx, 'controllerOf').and.resolveTo();
+    jest.spyOn(tx, 'controllerOf').mockResolvedValue(Promise.resolve<any>(true));
 
     const instanceConfig = {
       token: 'token',
@@ -170,7 +170,7 @@ describe('TranslationService', () => {
 
   it('should not add a malformed instance (alias)', async () => {
     // setup
-    spyOn(tx, 'controllerOf').and.resolveTo();
+    jest.spyOn(tx, 'controllerOf').mockResolvedValue(Promise.resolve<any>(true));;
 
     const instanceConfig = {
       token: 'token',
@@ -179,13 +179,13 @@ describe('TranslationService', () => {
     };
 
     // act/assert
-    await expectAsync(service.addInstance(instanceConfig)).toBeResolvedTo(false);
+    await expect(service.addInstance(instanceConfig)).resolves.toBe(false);
     expect(tx.controllerOf).not.toHaveBeenCalled();
   });
 
   it('should not add a malformed instance (token)', async () => {
     // setup
-    spyOn(tx, 'controllerOf').and.resolveTo();
+    jest.spyOn(tx, 'controllerOf').mockResolvedValue(Promise.resolve<any>(true));
 
     const instanceConfig = {
       token: '',
@@ -194,7 +194,7 @@ describe('TranslationService', () => {
     };
 
     // act/assert
-    await expectAsync(service.addInstance(instanceConfig)).toBeResolvedTo(false);
+    await expect(service.addInstance(instanceConfig)).resolves.toBe(false);
     expect(tx.controllerOf).not.toHaveBeenCalled();
   });
 
@@ -206,7 +206,7 @@ describe('TranslationService', () => {
       controlled: false,
     };
     await service.addInstance(instanceConfig);
-    spyOn(tx, 'controllerOf').and.resolveTo();
+    jest.spyOn(tx, 'controllerOf').mockResolvedValue(Promise.resolve<any>(true));
 
     // act
     const result = await service.addInstance(instanceConfig);
@@ -224,8 +224,9 @@ describe('TranslationService', () => {
       controlled: true,
     };
 
-    spyOn(tx, 'controllerOf').and.throwError('error');
-
+    jest.spyOn(tx, 'controllerOf').mockImplementation(() => {
+      throw new Error('error');
+    });
     // act
     const result = await service.addInstance(instanceConfig);
 
@@ -236,8 +237,8 @@ describe('TranslationService', () => {
 
   it('should fetch translations on demand without custom instance', async () => {
     // setup
-    spyOn(tx, 'fetchTranslations').and.resolveTo();
-    spyOn(service, 'getInstance').and.returnValue({
+    jest.spyOn(tx, 'fetchTranslations').mockResolvedValue();
+    jest.spyOn(service, 'getInstance').mockReturnValue({
       currentLocale: 'en',
       fetchTranslations: tx.fetchTranslations,
       fetchedTags: { en: [] },
@@ -252,8 +253,8 @@ describe('TranslationService', () => {
 
   it('should fetch translations on demand without custom instance no fetched tags', async () => {
     // setup
-    spyOn(tx, 'fetchTranslations').and.resolveTo();
-    spyOn(service, 'getInstance').and.returnValue({
+    jest.spyOn(tx, 'fetchTranslations').mockResolvedValue();
+    jest.spyOn(service, 'getInstance').mockReturnValue({
       currentLocale: 'en',
       fetchTranslations: tx.fetchTranslations,
       fetchedTags: undefined,
@@ -268,8 +269,8 @@ describe('TranslationService', () => {
 
   it('should fetch translations on demand with custom instance', async () => {
     // setup
-    spyOn(tx, 'fetchTranslations').and.resolveTo();
-    spyOn(service, 'getInstance').and.returnValue({
+    jest.spyOn(tx, 'fetchTranslations').mockResolvedValue();
+    jest.spyOn(service, 'getInstance').mockReturnValue({
       currentLocale: 'en',
       fetchTranslations: tx.fetchTranslations,
       fetchedTags: [],
@@ -284,8 +285,8 @@ describe('TranslationService', () => {
   });
 
   it('should not fetch translations on demand if no instance', async () => {
-    // setup
-    spyOn(tx, 'fetchTranslations').and.resolveTo();
+    // Mock the fetchTranslations function to prevent actual API calls
+    jest.spyOn(tx, 'fetchTranslations').mockResolvedValue();
 
     // act
     await service.fetchTranslations('tag1');

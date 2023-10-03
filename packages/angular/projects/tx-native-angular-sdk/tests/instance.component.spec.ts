@@ -32,8 +32,8 @@ describe('TXInstanceComponent', () => {
         // setup
         component.token = 'token';
         component.alias = 'alias';
-        spyOn(service, 'addInstance').and.resolveTo(true);
-        spyOn(service, 'getInstance').and.returnValue(tx);
+        jest.spyOn(service, 'addInstance').mockResolvedValue(true);
+        jest.spyOn(service, 'getInstance').mockReturnValue(tx);
 
         // act
         await component.ngOnInit();
@@ -51,8 +51,8 @@ describe('TXInstanceComponent', () => {
         // setup
         component.token = 'token';
         component.alias = 'alias';
-        spyOn(service, 'addInstance').and.resolveTo(false);
-        spyOn(service, 'getInstance');
+        jest.spyOn(service, 'addInstance').mockResolvedValue(false);
+        jest.spyOn(service, 'getInstance');
 
         // act
         await component.ngOnInit();
