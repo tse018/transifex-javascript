@@ -170,7 +170,7 @@ describe('TranslationService', () => {
 
   it('should not add a malformed instance (alias)', async () => {
     // setup
-    jest.spyOn(tx, 'controllerOf').mockResolvedValue(Promise.resolve<any>(true));;
+    jest.spyOn(tx, 'controllerOf').mockResolvedValue(Promise.resolve<any>(true));
 
     const instanceConfig = {
       token: 'token',
@@ -286,12 +286,12 @@ describe('TranslationService', () => {
 
   it('should not fetch translations on demand if no instance', async () => {
     // Mock the fetchTranslations function to prevent actual API calls
-    jest.spyOn(tx, 'fetchTranslations').mockResolvedValue();
+    const fetchTranslationsSpy = jest.spyOn(tx, 'fetchTranslations').mockReturnValue(Promise.resolve());
 
     // act
     await service.fetchTranslations('tag1');
 
     // assert
-    expect(tx.fetchTranslations).not.toHaveBeenCalled();
+    expect(fetchTranslationsSpy).not.toHaveBeenCalled();
   });
 });

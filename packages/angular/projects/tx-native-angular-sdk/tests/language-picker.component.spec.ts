@@ -92,11 +92,12 @@ describe('LanguagePickerComponent', () => {
     expect(component.onChange).toHaveBeenCalled();
   });
 
-  it('should get languages of an alternative instance', async () => {
+  it('should get languages of an alternative instance', async ():Promise<void> => {
     // setup
     instance.alias = 'test';
     instance.token = 'test';
     component.instance = instance;
+
     jest.spyOn(instance, 'instanceIsReady').mockReturnValue(of(true));
     jest.spyOn(service, 'getLanguages').mockResolvedValue(languages);
 
